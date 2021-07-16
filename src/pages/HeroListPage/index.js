@@ -19,7 +19,7 @@ export default function HeroListPage() {
 
 const Page = styled.div`
   max-width: ${PAGE_MAX_WIDTH};
-  margin: 50px auto 0;
+  margin: 0 auto;
 `;
 
 const HeroList = styled.div`

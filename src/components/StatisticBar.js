@@ -4,7 +4,7 @@ export default function StatisticBar({ name, value, operators, isMax, isMin }) {
   const { increment, decrement } = operators;
   return (
     <Bar>
-      <Name>{name}</Name>
+      <Name>{name.toUpperCase()}</Name>
       <Control>
         <Increment onClick={increment} disabled={isMax}>
           +
@@ -27,6 +27,10 @@ const Name = styled.div`
   flex-basis: 40px;
   flex-grow: 1;
   flex-shrink: 1;
+  font-family: 'Marvel';
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-align: center;
 `;
 
 const Control = styled.div`

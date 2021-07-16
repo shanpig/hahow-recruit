@@ -43,6 +43,7 @@ const Page = styled.div`
   padding: 10px 20px;
   margin: 0 auto;
   display: flex;
+  background: linear-gradient(100deg, white 50%, rgb(255, 50, 50) 50%);
 `;
 
 const PageLeft = styled.div`
