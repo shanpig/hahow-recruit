@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import { PAGE_MAX_WIDTH } from '../../variables';
 import styled from 'styled-components';
 import useHeroes from '../../hooks/useHeroes';
@@ -11,7 +10,7 @@ export default function HeroListPage() {
     <Page>
       <HeroList>
         {heroList.map((hero) => (
-          <HeroCard hero={hero} />
+          <HeroCard key={hero.id} hero={hero} />
         ))}
       </HeroList>
     </Page>

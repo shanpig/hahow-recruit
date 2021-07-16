@@ -26,24 +26,6 @@ export default function HeroProfilePage() {
                 isMax={remainPoints === 0}
                 isMin={value === 0}
               />
-              // <StatisticBar key={i}>
-              //   <StatisticName>{key}</StatisticName>{' '}
-              //   <StatisticControl>
-              //     <Increment
-              //       onClick={() => increment(key)}
-              //       disabled={remainPoints === 0}
-              //     >
-              //       +
-              //     </Increment>
-              //     <Value>{val}</Value>
-              //     <Decrement
-              //       onClick={() => decrement(key)}
-              //       disabled={val === 0}
-              //     >
-              //       -
-              //     </Decrement>
-              //   </StatisticControl>
-              // </StatisticBar>
             );
           })}
         </Statistics>

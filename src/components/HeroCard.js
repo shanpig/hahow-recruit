@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function HeroCard({ hero }) {
   return (
-    <Card key={hero.id} to={`/heroes/${hero.id}`} activeClassName="active">
+    <Card to={`/heroes/${hero.id}`} activeClassName="active">
       <Image src={hero.image} />
       <Title>{hero.name}</Title>
     </Card>
