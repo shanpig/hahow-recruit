@@ -1,30 +1,31 @@
 import { NavLink } from 'react-router-dom';
 import { PAGE_MAX_WIDTH } from '../../variables';
 import styled from 'styled-components';
-import daredevilUrl from '../../images/daredevil.jpg';
-import thorUrl from '../../images/thor.jpg';
-import ironmanUrl from '../../images/ironman.jpg';
-import hulkUrl from '../../images/hulk.jpg';
+import { getHeroList } from '../../api';
+import { useEffect, useState } from 'react';
+
 export default function HeroListPage() {
+  const [heroList, setHeroList] = useState([]);
+  useEffect(() => {
+    getHeroList().then((data) => {
+      console.log(data);
+      setHeroList(data);
+    });
+  }, []);
+
   return (
     <Page>
       <HeroList>
-        <HeroCard to="/heroes/dareDevil" activeClass="active">
-          <HeroImage src={daredevilUrl} />
-          <HeroTitle>DareDevil</HeroTitle>
-        </HeroCard>
-        <HeroCard to="/heroes/thor" activeClass="active">
-          <HeroImage src={thorUrl} />
-          <HeroTitle>Thor</HeroTitle>
-        </HeroCard>
-        <HeroCard to="/heroes/ironman" activeClass="active">
-          <HeroImage src={ironmanUrl} />
-          <HeroTitle>Iron man</HeroTitle>
-        </HeroCard>
-        <HeroCard to="/heroes/hulk" activeClass="active">
-          <HeroImage src={hulkUrl} />
-          <HeroTitle>Hulk</HeroTitle>
-        </HeroCard>
+        {heroList.map((hero) => (
+          <HeroCard
+            key={hero.id}
+            to={`/heroes/${hero.id}`}
+            activeClassName="active"
+          >
+            <HeroImage src={hero.image} />
+            <HeroTitle>{hero.name}</HeroTitle>
+          </HeroCard>
+        ))}
       </HeroList>
     </Page>
   );
