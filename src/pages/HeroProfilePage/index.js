@@ -55,10 +55,8 @@ const Page = styled.div`
   width: 100%;
   max-width: ${PAGE_MAX_WIDTH};
   padding: 10px 20px;
-  /* margin: 0 auto; */
   display: flex;
   justify-content: space-around;
-  /* background: linear-gradient(100deg, white 50%, rgb(255, 50, 50) 50%); */
   background-color: #ffffff44;
   backdrop-filter: blur(5px);
 

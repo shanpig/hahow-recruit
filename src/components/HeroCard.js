@@ -47,9 +47,6 @@ const Image = styled.img`
   border: 7px solid transparent;
   border-image: url(${borderUrl});
   border-image-slice: 10 10 10 10;
-
-  /* border: 4px solid white;
-  outline: 1px solid black; */
 `;
 
 const Title = styled.h2`
