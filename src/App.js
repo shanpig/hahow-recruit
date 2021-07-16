@@ -7,9 +7,7 @@ function App() {
     <Router>
       <Route path="/heroes" component={HeroListPage} />
       <Route path="/heroes/:heroId" component={HeroProfilePage} />
-      <Route exact path="/">
-        <Redirect to="/heroes" />
-      </Route>
+      <Route exact path="/" component={<Redirect to="/heroes" />}></Route>
     </Router>
   );
 }
