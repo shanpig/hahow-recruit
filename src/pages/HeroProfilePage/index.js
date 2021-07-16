@@ -1,53 +1,11 @@
-import styled, { StyleSheetManager } from 'styled-components';
+import styled from 'styled-components';
 import { useParams } from 'react-router';
 import { PAGE_MAX_WIDTH } from '../../variables';
-import { useCallback, useState, useEffect, useRef } from 'react';
-import { getHeroProfile, patchHeroProfile } from '../../api';
+import useStat from '../../hooks/useStat';
 
 export default function HeroProfilePage() {
   const { heroId } = useParams();
-  const totalPoints = useRef(0);
-  const [stat, setStat] = useState({});
-  const [remainPoints, setRemainPoints] = useState(0);
-
-  useEffect(() => {
-    getHeroProfile(heroId).then((data) => {
-      setStat(data);
-      totalPoints.current = sum(data);
-    });
-  }, [heroId]);
-
-  useEffect(() => {
-    function calculateRemainPoints() {
-      const currentPoints = sum(stat);
-      return totalPoints.current - currentPoints;
-    }
-    setRemainPoints(calculateRemainPoints());
-  }, [stat]);
-
-  function sum(stat) {
-    return Object.values(stat).reduce((acc, cur) => acc + cur, 0);
-  }
-
-  function increment(key) {
-    if (remainPoints === 0) return;
-    setStat({
-      ...stat,
-      [key]: stat[key] + 1,
-    });
-  }
-  function decrement(key) {
-    if (stat[key] === 0) return;
-    setStat({
-      ...stat,
-      [key]: stat[key] - 1,
-    });
-  }
-
-  function save() {
-    console.log(stat);
-    patchHeroProfile(heroId, stat);
-  }
+  const { stat, increment, decrement, save, remainPoints } = useStat(heroId);
 
   return (
     <Page>

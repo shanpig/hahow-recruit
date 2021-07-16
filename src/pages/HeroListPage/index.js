@@ -2,16 +2,10 @@ import { NavLink } from 'react-router-dom';
 import { PAGE_MAX_WIDTH } from '../../variables';
 import styled from 'styled-components';
 import { getHeroList } from '../../api';
-import { useEffect, useState } from 'react';
+import useHeroes from '../../hooks/useHeroes';
 
 export default function HeroListPage() {
-  const [heroList, setHeroList] = useState([]);
-  useEffect(() => {
-    getHeroList().then((data) => {
-      console.log(data);
-      setHeroList(data);
-    });
-  }, []);
+  const { heroList } = useHeroes();
 
   return (
     <Page>
