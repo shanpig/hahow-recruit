@@ -22,8 +22,9 @@ export default function useStat(heroId) {
   }, [stat]);
 
   function save() {
-    console.log(stat);
-    patchHeroProfile(heroId, stat);
+    return new Promise((res, rej) => {
+      patchHeroProfile(heroId, stat).then((resultOk) => res(resultOk));
+    });
   }
 
   function sum(stat) {

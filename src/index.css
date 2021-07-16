@@ -18,9 +18,15 @@
     U+FEFF, U+FFFD;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+TC:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700&display=swap');
+@font-face {
+  font-family: 'Avenger';
+  src: url(./fonts/AvengeroRegular-zvgl.ttf);
+}
+
 * {
   box-sizing: border-box;
-  font-family: 'Marvel', 'Noto-sans';
 }
 
 html {

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 import { useParams } from 'react-router';
 import { PAGE_MAX_WIDTH } from '../../variables';
 import useStat from '../../hooks/useStat';
@@ -6,7 +7,15 @@ import StatisticBar from '../../components/StatisticBar';
 
 export default function HeroProfilePage() {
   const { heroId } = useParams();
+  const [isSaving, setIsSaving] = useState(false);
   const { stat, increment, decrement, save, remainPoints } = useStat(heroId);
+
+  function saveHandler() {
+    setIsSaving(true);
+    save().then((isOk) => {
+      if (isOk) setIsSaving(false);
+    });
+  }
 
   return (
     <Page>
@@ -31,22 +40,37 @@ export default function HeroProfilePage() {
         </Statistics>
       </PageLeft>
       <PageRight>
-        <RemainPoints>剩餘點數 : {remainPoints}</RemainPoints>
-        <SaveButton onClick={save}>儲存</SaveButton>
+        <RemainPoints>
+          剩餘點數 : <span>{remainPoints}</span>
+        </RemainPoints>
+        <SaveButton onClick={saveHandler}>
+          {isSaving ? 'Saving...' : 'Save'}
+        </SaveButton>
       </PageRight>
     </Page>
   );
 }
 
 const Page = styled.div`
+  width: 100%;
   max-width: ${PAGE_MAX_WIDTH};
   padding: 10px 20px;
-  margin: 0 auto;
   display: flex;
+  justify-content: space-around;
+  background-color: #ffffff44;
+  backdrop-filter: blur(5px);
+
+  @media screen and (max-width: 690px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
 const PageLeft = styled.div`
-  flex-grow: 2;
+  width: 60%;
+  @media screen and (max-width: 690px) {
+    width: unset;
+  }
 `;
 
 const Statistics = styled.div`
@@ -56,11 +80,39 @@ const Statistics = styled.div`
 `;
 
 const PageRight = styled.div`
-  flex-grow: 1;
+  width: 33%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  align-items: flex-end;
+
+  @media screen and (max-width: 690px) {
+    align-items: flex-start;
+    width: unset;
+  }
 `;
 
-const RemainPoints = styled.p``;
-const SaveButton = styled.button``;
+const RemainPoints = styled.p`
+  color: white;
+  font-family: 'Noto Sans TC';
+  font-size: 1.3em;
+
+  & span {
+    font-size: 1.5em;
+    margin-left: 10px;
+  }
+`;
+
+const SaveButton = styled.button`
+  min-width: fit-content;
+  background-color: rgb(220, 0, 0);
+  color: white;
+  font-family: 'Avenger';
+  font-weight: bolder;
+  font-size: 1.6em;
+  cursor: pointer;
+  letter-spacing: 10px;
+  text-indent: 5px;
+  padding: 10px 20px;
+  border: none;
+`;

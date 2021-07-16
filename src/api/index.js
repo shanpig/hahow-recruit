@@ -17,7 +17,9 @@ function patchHeroProfile(id, profile) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(profile),
-  }).then((data) => console.log(data));
+  })
+    .then((response) => response.ok)
+    .catch((err) => console.log(err));
 }
 
 export { getHeroList, getHeroProfile, patchHeroProfile };

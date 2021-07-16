@@ -18,13 +18,18 @@ export default function HeroListPage() {
 }
 
 const Page = styled.div`
+  width: 100%;
   max-width: ${PAGE_MAX_WIDTH};
-  margin: 50px auto 0;
 `;
 
 const HeroList = styled.div`
   display: flex;
-  flex-wrap: wrap;
+
   justify-content: center;
   gap: 10px;
+  padding: 10px 0;
+
+  @media screen and (max-width: 560px) {
+    flex-wrap: wrap;
+  }
 `;
