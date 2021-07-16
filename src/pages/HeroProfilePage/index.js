@@ -1,37 +1,76 @@
-import styled from 'styled-components';
+import styled, { StyleSheetManager } from 'styled-components';
 import { useParams } from 'react-router';
 import { PAGE_MAX_WIDTH } from '../../variables';
-import { useState } from 'react';
-
-const statistics = {
-  str: 5,
-  int: 5,
-  agi: 10,
-  luk: 5,
-};
+import { useCallback, useState, useEffect, useRef } from 'react';
+import { getHeroProfile, patchHeroProfile } from '../../api';
 
 export default function HeroProfilePage() {
   const { heroId } = useParams();
-  const totalPoints = Object.values(statistics).reduce((acc, cur) => acc + cur);
-  const [stat, setStat] = useState(statistics);
+  const totalPoints = useRef(0);
+  const [stat, setStat] = useState({});
+  const [remainPoints, setRemainPoints] = useState(0);
 
-  function calculateRemainPoints() {
-    const currentPoints = Object.values(stat).reduce((acc, cur) => acc + cur);
-    return totalPoints - currentPoints;
+  useEffect(() => {
+    getHeroProfile(heroId).then((data) => {
+      setStat(data);
+      totalPoints.current = sum(data);
+    });
+  }, [heroId]);
+
+  useEffect(() => {
+    function calculateRemainPoints() {
+      const currentPoints = sum(stat);
+      return totalPoints.current - currentPoints;
+    }
+    setRemainPoints(calculateRemainPoints());
+  }, [stat]);
+
+  function sum(stat) {
+    return Object.values(stat).reduce((acc, cur) => acc + cur, 0);
+  }
+
+  function increment(key) {
+    if (remainPoints === 0) return;
+    setStat({
+      ...stat,
+      [key]: stat[key] + 1,
+    });
+  }
+  function decrement(key) {
+    if (stat[key] === 0) return;
+    setStat({
+      ...stat,
+      [key]: stat[key] - 1,
+    });
+  }
+
+  function save() {
+    console.log(stat);
+    patchHeroProfile(heroId, stat);
   }
 
   return (
     <Page>
       <PageLeft>
         <Statistics>
-          {Object.entries(stat).map(([key, val]) => {
+          {Object.entries(stat).map(([key, val], i) => {
             return (
-              <StatisticBar>
+              <StatisticBar key={i}>
                 <StatisticName>{key}</StatisticName>{' '}
                 <StatisticControl>
-                  <Increment>+</Increment>
+                  <Increment
+                    onClick={() => increment(key)}
+                    disabled={remainPoints === 0}
+                  >
+                    +
+                  </Increment>
                   <Value>{val}</Value>
-                  <Decrement>-</Decrement>
+                  <Decrement
+                    onClick={() => decrement(key)}
+                    disabled={val === 0}
+                  >
+                    -
+                  </Decrement>
                 </StatisticControl>
               </StatisticBar>
             );
@@ -39,8 +78,8 @@ export default function HeroProfilePage() {
         </Statistics>
       </PageLeft>
       <PageRight>
-        <RemainPoints>剩餘點數 : {calculateRemainPoints()}</RemainPoints>
-        <SaveButton>儲存</SaveButton>
+        <RemainPoints>剩餘點數 : {remainPoints}</RemainPoints>
+        <SaveButton onClick={save}>儲存</SaveButton>
       </PageRight>
     </Page>
   );
