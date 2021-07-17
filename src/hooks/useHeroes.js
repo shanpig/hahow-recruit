@@ -5,7 +5,6 @@ export default function useHeroes() {
   const [heroList, setHeroList] = useState([]);
   useEffect(() => {
     getHeroList().then((data) => {
-      console.log(data);
       setHeroList(data);
     });
   }, []);

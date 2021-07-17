@@ -1,8 +1,14 @@
+import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import borderUrl from '../images/border.png';
+import borderUrl from '../../images/border.png';
+import PropTypes from 'prop-types';
 
-export default function HeroCard({ hero }) {
+HeroCard.propTypes = {
+  hero: PropTypes.object,
+};
+
+function HeroCard({ hero }) {
   return (
     <Card to={`/heroes/${hero.id}`} activeClassName="active">
       <ImageHolder>
@@ -12,6 +18,8 @@ export default function HeroCard({ hero }) {
     </Card>
   );
 }
+
+export default React.memo(HeroCard);
 
 const Card = styled(NavLink)`
   padding: 10px;

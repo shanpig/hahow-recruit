@@ -1,7 +1,7 @@
 import { PAGE_MAX_WIDTH } from '../../variables';
 import styled from 'styled-components';
 import useHeroes from '../../hooks/useHeroes';
-import HeroCard from '../../components/HeroCard';
+import HeroCard from './HeroCard';
 
 export default function HeroListPage() {
   const { heroList } = useHeroes();
@@ -24,6 +24,7 @@ const Page = styled.div`
 
 const HeroList = styled.div`
   display: flex;
+  min-height: 180px;
 
   justify-content: center;
   gap: 10px;
