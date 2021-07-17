@@ -3,10 +3,6 @@
 /* Document
    ========================================================================== */
 
-/**
- * 1. Correct the line height in all browsers.
- * 2. Prevent adjustments of font size after orientation changes in iOS.
- */
 @font-face {
   font-family: 'Marvel';
   font-style: normal;
@@ -28,6 +24,11 @@
 * {
   box-sizing: border-box;
 }
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
 
 html {
   line-height: 1.15; /* 1 */
@@ -261,6 +262,7 @@ fieldset {
  */
 
 legend {
+  box-sizing: border-box; /* 1 */
   color: inherit; /* 2 */
   display: table; /* 1 */
   max-width: 100%; /* 1 */
