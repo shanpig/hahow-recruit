@@ -1,51 +1,43 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router';
 import { PAGE_MAX_WIDTH } from '../../variables';
-import useStat from '../../hooks/useStat';
-import StatisticBar from '../../components/StatisticBar';
+import useStatistics from '../../hooks/useStatistics';
+import StatisticsControl from './StatisticsControl';
+import SaveProfileButton from './SaveProfileButton';
 
 export default function HeroProfilePage() {
   const { heroId } = useParams();
   const [isSaving, setIsSaving] = useState(false);
-  const { stat, increment, decrement, save, remainPoints } = useStat(heroId);
+  const { statistics, increment, decrement, save, remainPoints } =
+    useStatistics(heroId);
 
   function saveHandler() {
     setIsSaving(true);
-    save().then((isOk) => {
-      if (isOk) setIsSaving(false);
+    save().then(() => {
+      setIsSaving(false);
     });
   }
 
   return (
     <Page>
       <PageLeft>
-        <Statistics>
-          {Object.entries(stat).map(([name, value], i) => {
-            const operators = {
-              increment: () => increment(name),
-              decrement: () => decrement(name),
-            };
-            return (
-              <StatisticBar
-                key={i}
-                name={name}
-                value={value}
-                operators={operators}
-                isMax={remainPoints === 0}
-                isMin={value === 0}
-              />
-            );
-          })}
-        </Statistics>
+        <StatisticsControl
+          statistics={statistics}
+          increment={increment}
+          decrement={decrement}
+          remainPoints={remainPoints}
+        ></StatisticsControl>
       </PageLeft>
       <PageRight>
         <RemainPoints>
           剩餘點數 : <span>{remainPoints}</span>
         </RemainPoints>
-        <SaveButton onClick={saveHandler}>
-          {isSaving ? 'Saving...' : 'Save'}
-        </SaveButton>
+        <SaveProfileButton
+          saveHandler={saveHandler}
+          disabled={remainPoints !== 0 || isSaving}
+          isSaving={isSaving}
+        />
       </PageRight>
     </Page>
   );
@@ -73,12 +65,6 @@ const PageLeft = styled.div`
   }
 `;
 
-const Statistics = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
-
 const PageRight = styled.div`
   width: 33%;
   display: flex;
@@ -87,6 +73,7 @@ const PageRight = styled.div`
   align-items: flex-end;
 
   @media screen and (max-width: 690px) {
+    font-size: 10pt;
     align-items: flex-start;
     width: unset;
   }
@@ -101,18 +88,4 @@ const RemainPoints = styled.p`
     font-size: 1.5em;
     margin-left: 10px;
   }
-`;
-
-const SaveButton = styled.button`
-  min-width: fit-content;
-  background-color: rgb(220, 0, 0);
-  color: white;
-  font-family: 'Avenger';
-  font-weight: bolder;
-  font-size: 1.6em;
-  cursor: pointer;
-  letter-spacing: 10px;
-  text-indent: 5px;
-  padding: 10px 20px;
-  border: none;
 `;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Route, Redirect } from 'react-router-dom';
 import HeroListPage from './pages/HeroListPage';
 import HeroProfilePage from './pages/HeroProfilePage';
 import backgroundUrl from './images/marvel-background.jpg';
