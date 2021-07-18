@@ -1,15 +1,22 @@
+import React, { lazy, Suspense } from 'react';
 import styled from 'styled-components';
 import { HashRouter as Router, Route, Redirect } from 'react-router-dom';
 import HeroListPage from './pages/HeroListPage';
-import HeroProfilePage from './pages/HeroProfilePage';
+// import HeroProfilePage from './pages/HeroProfilePage';
 import backgroundUrl from './images/marvel-background.jpg';
+const HeroProfilePage = lazy(() => import('./pages/HeroProfilePage'));
+const loader = () => <p>loading</p>;
 
 function App() {
   return (
     <Page>
       <Router>
         <Route path="/heroes" component={HeroListPage} />
-        <Route path="/heroes/:heroId" component={HeroProfilePage} />
+        <Route path="/heroes/:heroId">
+          <Suspense fallback={loader()}>
+            <HeroProfilePage />
+          </Suspense>
+        </Route>
         <Route exact path="/">
           <Redirect to="/heroes" />
         </Route>

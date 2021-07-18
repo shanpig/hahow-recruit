@@ -8,13 +8,13 @@ useStatistics.propTypes = {
 
 export default function useStatistics(heroId) {
   const totalPoints = useRef(0);
-  const [statistics, setStatistics] = useState([]);
+  const [statistics, setStatistics] = useState({});
   const [remainPoints, setRemainPoints] = useState(0);
 
   useEffect(() => {
-    getHeroProfile(heroId).then((data) => {
-      setStatistics(data);
-      totalPoints.current = sum(data);
+    getHeroProfile(heroId).then((initialStatistics) => {
+      setStatistics(initialStatistics);
+      totalPoints.current = sum(initialStatistics);
     });
   }, [heroId]);
 
@@ -28,7 +28,9 @@ export default function useStatistics(heroId) {
 
   function save() {
     return new Promise((res, rej) => {
-      patchHeroProfile(heroId, statistics).then((resultOk) => res(resultOk));
+      patchHeroProfile(heroId, statistics)
+        .then((resultOk) => res(resultOk))
+        .catch((err) => rej(err));
     });
   }
 
@@ -43,6 +45,7 @@ export default function useStatistics(heroId) {
       [key]: statistics[key] + 1,
     });
   }
+
   function decrement(key) {
     if (statistics[key] === 0) return;
     setStatistics({

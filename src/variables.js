@@ -1,3 +1,4 @@
-const PAGE_MAX_WIDTH = '800PX';
-
-export { PAGE_MAX_WIDTH };
+const PAGE_MAX_WIDTH = '800px';
+const TABLET_WIDTH = '768px';
+const MOBILE_WIDTH = '410px';
+export { PAGE_MAX_WIDTH, TABLET_WIDTH, MOBILE_WIDTH };
