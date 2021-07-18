@@ -19,7 +19,10 @@ function patchHeroProfile(id, profile) {
     body: JSON.stringify(profile),
   })
     .then((response) => response.ok)
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log('Patch failed: ', err);
+      return err;
+    });
 }
 
 export { getHeroList, getHeroProfile, patchHeroProfile };

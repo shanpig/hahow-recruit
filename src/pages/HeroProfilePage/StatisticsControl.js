@@ -31,8 +31,8 @@ export default function StatisticsControl({
 
   return (
     <Statistics>
-      {statisticProps.map((props) => (
-        <StatisticBar {...props} />
+      {statisticProps.map((props, i) => (
+        <StatisticBar {...props} key={i} />
       ))}
     </Statistics>
   );

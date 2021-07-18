@@ -24,7 +24,7 @@ const SaveButton = styled.button`
   height: 50px;
   background-color: rgb(220, 0, 0);
   color: white;
-  font-family: 'Avenger';
+  font-family: 'Avenger', 'sans-serif';
   font-weight: bolder;
   font-size: 1.6em;
   cursor: pointer;
