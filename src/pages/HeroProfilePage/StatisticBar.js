@@ -18,19 +18,6 @@ export default function StatisticBar({ name, value, operators, isMax, isMin }) {
   const TEXTREF = useRef(null);
   const { increment, decrement } = operators;
 
-  function isAnimating(element) {
-    return element.className.includes('animated');
-  }
-
-  function animateText(textElement, animateDirection) {
-    if (isAnimating(textElement)) return;
-
-    textElement.classList.add('animated', animateDirection);
-    setTimeout(() => {
-      textElement.classList.remove('animated', animateDirection);
-    }, ANIMATION_TIME);
-  }
-
   const debouncedIncrementHandler = debounce(() => {
     animateText(TEXTREF.current, 'up');
     increment();
@@ -40,6 +27,27 @@ export default function StatisticBar({ name, value, operators, isMax, isMin }) {
     animateText(TEXTREF.current, 'down');
     decrement();
   }, DEBOUNCE_TIME);
+
+  function animateText(textElement, animateDirection) {
+    if (isAnimating(textElement)) return;
+
+    startAnimation(textElement, animateDirection);
+    setTimeout(() => {
+      endAnimation(textElement, animateDirection);
+    }, ANIMATION_TIME);
+  }
+
+  function isAnimating(element) {
+    return element.className.includes('animated');
+  }
+
+  function startAnimation(element, animateDirection) {
+    element.classList.add('animated', animateDirection);
+  }
+
+  function endAnimation(element, animateDirection) {
+    element.classList.remove('animated', animateDirection);
+  }
 
   return (
     <Bar>
@@ -70,6 +78,7 @@ const Bar = styled.div`
 
 const Name = styled.div`
   max-width: 60px;
+  height: 1.2em;
   flex: 1 1 40px;
   font: bold 1.2em 'Avenger';
   letter-spacing: 2px;
@@ -83,17 +92,21 @@ const Control = styled.div`
   gap: 10px;
   align-items: center;
   justify-content: space-between;
+  transition: all ease 0.3s;
   background-color: rgba(255, 255, 255, 0.3);
   clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
 `;
 
 const ControlButton = styled.button`
-  width: 3em;
-  height: 2em;
+  width: 2em;
   background: none;
   border: none;
   padding: 0 5px;
-  font: bold 'Noto Sans TC' 1em;
+  font: bold 1.5em 'Noto Sans TC';
   background-color: rgba(255, 255, 255, 0.7);
   clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
 
