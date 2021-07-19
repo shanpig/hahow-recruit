@@ -1,11 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { createGlobalStyle } from 'styled-components';
+import { normalize } from 'styled-normalize';
 import App from './App';
+import fonts from './fonts/fonts';
 import reportWebVitals from './reportWebVitals';
+
+const GlobalStyle = createGlobalStyle`
+  ${fonts}
+  ${normalize}
+
+  * {
+    box-sizing: border-box;
+  }
+`;
 
 ReactDOM.render(
   <React.StrictMode>
+    <GlobalStyle />
     <App />
   </React.StrictMode>,
   document.getElementById('root')
