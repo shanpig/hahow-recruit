@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import { useState, useEffect, useRef } from 'react';
 import { getHeroProfile, patchHeroProfile } from '../api/index';
-import PropTypes from 'prop-types';
 
 useStatistics.propTypes = {
   heroId: PropTypes.number,
@@ -34,8 +34,8 @@ export default function useStatistics(heroId) {
     });
   }
 
-  function sum(statistics) {
-    return Object.values(statistics).reduce((acc, cur) => acc + cur, 0);
+  function sum(object) {
+    return Object.values(object).reduce((acc, cur) => acc + cur, 0);
   }
 
   function increment(key) {
@@ -54,5 +54,11 @@ export default function useStatistics(heroId) {
     });
   }
 
-  return { statistics, increment, decrement, save, remainPoints };
+  return {
+    statistics,
+    increment,
+    decrement,
+    save,
+    remainPoints,
+  };
 }
