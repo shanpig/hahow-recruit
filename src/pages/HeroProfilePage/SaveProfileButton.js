@@ -9,6 +9,12 @@ SaveProfileButton.propTypes = {
   isSaving: PropTypes.bool,
 };
 
+SaveProfileButton.defaultProps = {
+  saveHandler: () => {},
+  disabled: false,
+  isSaving: false,
+};
+
 function SaveProfileButton({ saveHandler, disabled, isSaving }) {
   return (
     <SaveButton onClick={saveHandler} disabled={disabled}>

@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
 import styled from 'styled-components';
-import debounce from '../../utils/misc/debouce';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
+import debounce from '../../utils/misc/debouce';
 
 const DEBOUNCE_TIME = 100;
 const ANIMATION_TIME = 200;
@@ -9,9 +9,20 @@ const ANIMATION_TIME = 200;
 StatisticBar.propTypes = {
   name: PropTypes.string,
   value: PropTypes.number,
-  operators: PropTypes.object,
+  operators: PropTypes.shape({
+    increment: PropTypes.func,
+    decrement: PropTypes.func,
+  }),
   isMax: PropTypes.bool,
   isMin: PropTypes.bool,
+};
+
+StatisticBar.defaultProps = {
+  name: 'skill',
+  value: 0,
+  operators: { increment: () => {}, decrement: () => {} },
+  isMax: false,
+  isMin: false,
 };
 
 export default function StatisticBar({ name, value, operators, isMax, isMin }) {

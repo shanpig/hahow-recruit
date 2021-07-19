@@ -1,13 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import borderUrl from '../../images/border.png';
-import PropTypes from 'prop-types';
 import { TABLET_WIDTH } from '../../variables';
 import marvelUrl from '../../images/marvel.jpg';
 
 HeroCard.propTypes = {
-  hero: PropTypes.object,
+  hero: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    image: PropTypes.string,
+  }),
+};
+
+HeroCard.defaultProps = {
+  hero: {
+    id: '0',
+    name: 'hero',
+    image: 'https://picsum.photos/100',
+  },
 };
 
 function HeroCard({ hero }) {

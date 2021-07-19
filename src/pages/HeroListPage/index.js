@@ -1,13 +1,15 @@
-import React, { lazy, Suspense } from 'react';
-import { MOBILE_WIDTH, PAGE_MAX_WIDTH, TABLET_WIDTH } from '../../variables';
-import { Puff as LoadingIcon } from 'react-loading-icons';
 import styled from 'styled-components';
+import React, { lazy, Suspense } from 'react';
+import { Puff as LoadingIcon } from 'react-loading-icons';
+import { MOBILE_WIDTH, PAGE_MAX_WIDTH, TABLET_WIDTH } from '../../variables';
 import useHeroes from '../../hooks/useHeroes';
+
 const HeroCard = lazy(() => import('./HeroCard'));
 const Loader = () => <LoadingIcon />;
 
 export default function HeroListPage() {
   const { heroList } = useHeroes();
+  console.log(heroList);
 
   return (
     <Page>

@@ -2,9 +2,10 @@ import React, { lazy, Suspense } from 'react';
 import styled from 'styled-components';
 import { HashRouter as Router, Route, Redirect } from 'react-router-dom';
 import HeroListPage from './pages/HeroListPage';
-// import HeroProfilePage from './pages/HeroProfilePage';
 import backgroundUrl from './images/marvel-background.jpg';
+
 const HeroProfilePage = lazy(() => import('./pages/HeroProfilePage'));
+// eslint-disable-next-line react/jsx-filename-extension
 const loader = () => <p>loading</p>;
 
 function App() {
