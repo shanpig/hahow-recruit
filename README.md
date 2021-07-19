@@ -58,7 +58,9 @@ npm run start
     These indicates the web performance and directly affects user experience.
     <br/><br/>
 9. **Eslint**
-  An code style checking library for enabling type checks, finding and fixing possible syntax problems, unifying team coding styles, etc. It is a convenient tool for checking consistency and maintain quality of your coding habits.
+  An code style checking library for enabling type checks, finding and fixing possible syntax problems, unifying team coding styles, etc. It is a convenient tool for checking consistency and maintain quality of your coding habits. There are many addons to integrate linting with various frameworks and styles. I use eslintint with react frameworks and airbnb styles with some self-disabled rules.
+10. **sweetAlert2, sweetAlert2-react-contents**
+  A responsive alert popup library for easy and elegant popup message. It is originally used in vanilla JS, but can be integrated with react with sweetalert-react-contents to provide styled components as alert title.
 
 
 ## When I will write comment
