@@ -11,55 +11,55 @@ npm run start
 ## Project structure
 ![project structure](https://user-images.githubusercontent.com/31932700/126054541-fe90548e-9c4e-43b5-a988-a794f7bc93fc.png)
 
-1. **api/**
+1. **api/**<br/>
   Handles all the data fetching from hahow backend apis.
-2. **fonts/**
+2. **fonts/**<br/>
   Stores all local fonts that are not served from a font provider.
-3. **hooks/**
+3. **hooks/**<br/>
   Stores all the custom hooks that manipulates data (from api).
-4. **pages/**
+4. **pages/**<br/>
   Stores all the page components and index.js as the main entry point.
-5. **utils/**
+5. **utils/**<br/>
   Miscellaneous utility functions, currently has only debounce function.
-6. **index.css**
+6. **index.css**<br/>
   Includes normalize.css, font imports, and few default styling settings.
-7. **variables.js**
+7. **variables.js**<br/>
   Contains all common variables used across different components. e.g. page width, tablet width, mobile width (for RWD puporses).
 
 ## Used third party library
-1. **@testing-library, Jest**
+1. **@testing-library, Jest**<br/>
   A library contains testing utilities for various use cases. Including developing with difference frameworks, firing events, testing function inputs/outputs, and so on.
-2. **prop-types**
+2. **prop-types**<br/>
   A separated library from react since v15.5. It gives the ability to check datatypes of the props a component receives, thereby reducing the possible mistakes in data-passing
-3. **react, react-dom**
+3. **react, react-dom**<br/>
   The core library of the react framework. **react** contains all the feature of react except for DOM accessibility, which is separated from react as **react-dom**. This gives the oppurtunity to reuse most of the similar usages between **react** and **react-native**.
-4. **react-loading-icons**
+4. **react-loading-icons**<br/>
   A small library contains several designful icons for loading.
-5. **react-router, react-router-dom**
+5. **react-router, react-router-dom**<br/>
   Popular router library for react. Similar to react and react-dom, it separates the DOM manipulating part from the core to give advantage to react-native.
-6. **react-scripts**
+6. **react-scripts**<br/>
   Contains the cli commands for running/testing/building/ejecting the project.
-7. **styled-components**
+7. **styled-components**<br/>
   A popular CSS-in-JS library. It creates components with class names that has a unique hash as a prefix to mitigate the class name collision problem. Also supports SASS/SCSS syntax, dynamic props passing, theming and various other use cases.
-8. **web-vitals**
+8. **web-vitals**<br/>
   A light-weight (~144kB) web performance report tools integrates to react that checks the vital signs of the web performance. Including : 
-    1. **CLS (cumulative layout shift)**
+    1. **CLS (cumulative layout shift)**<br/>
     The total shift caused by other content that is rendered on the page flow later on. This might triggers an unpleasant reading experience while content is pushed down by newly rendered element.
-    2. **FID (first interaction/input delay)**
+    2. **FID (first interaction/input delay)**<br/>
     The delay before the page is interactable. Sometimes the eventListeners don't kick in immediately after page load, which is not ideal for user experience.
-    3. **FCP (first contentful paint)**
+    3. **FCP (first contentful paint)**<br/>
     This refers to the first non white content that is painted on the webpage, which may indicate users that the page is almost done.
-    4. **LCP (largest contentful paint)**
+    4. **LCP (largest contentful paint)**<br/>
     The largest text block or image loaded into the viewport. This is a simplified solution to indicate meaningful paint to user, due to FMP(first meaningful paint) is often too complex to determine.
-    5. **TTFB (time to first byte)**
+    5. **TTFB (time to first byte)**<br/>
     The delay before the first data return from the server. According to [web.dev](https://web.dev/time-to-first-byte/), a delay less than 600ms is better.
 
     <br/>
     These indicates the web performance and directly affects user experience.
     <br/><br/>
-9. **Eslint**
+9. **Eslint**<br/>
   An code style checking library for enabling type checks, finding and fixing possible syntax problems, unifying team coding styles, etc. It is a convenient tool for checking consistency and maintain quality of your coding habits. There are many addons to integrate linting with various frameworks and styles. I use eslintint with react frameworks and airbnb styles with some self-disabled rules.
-10. **sweetAlert2, sweetAlert2-react-contents**
+10. **sweetAlert2, sweetAlert2-react-contents**<br/>
   A responsive alert popup library for easy and elegant popup message. It is originally used in vanilla JS, but can be integrated with react with sweetalert-react-contents to provide styled components as alert title.
 
 
