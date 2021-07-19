@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
 import { useParams } from 'react-router';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import { PAGE_MAX_WIDTH, TABLET_WIDTH } from '../../variables';
 import useStatistics from '../../hooks/useStatistics';
 import StatisticsControl from './StatisticsControl';
 import SaveProfileButton from './SaveProfileButton';
+
+const Alert = withReactContent(Swal);
 
 export default function HeroProfilePage() {
   const { heroId } = useParams();
@@ -17,8 +21,15 @@ export default function HeroProfilePage() {
     save()
       .then(() => {
         setIsSaving(false);
+        Alert.fire({
+          title: <AlertText>Success</AlertText>,
+          text: 'Hero profile saved.',
+          icon: 'success',
+          confirmButtonColor: 'green',
+        });
       })
       .catch((err) => {
+        // eslint-disable-next-line no-console
         console.log(err);
         setIsSaving(false);
       });
@@ -32,7 +43,7 @@ export default function HeroProfilePage() {
           increment={increment}
           decrement={decrement}
           remainPoints={remainPoints}
-        ></StatisticsControl>
+        />
       </PageLeft>
       <PageRight>
         <RemainPoints>
@@ -95,4 +106,8 @@ const RemainPoints = styled.p`
     font-size: 1.5em;
     margin-left: 10px;
   }
+`;
+
+const AlertText = styled.span`
+  font-family: 'Avenger';
 `;

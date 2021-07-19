@@ -1,12 +1,30 @@
 import styled from 'styled-components';
-import StatisticBar from './StatisticBar';
+import React from 'react';
 import PropTypes from 'prop-types';
+import StatisticBar from './StatisticBar';
 
 StatisticsControl.propTypes = {
-  statistics: PropTypes.object,
+  statistics: PropTypes.shape({
+    str: PropTypes.number,
+    agi: PropTypes.number,
+    luk: PropTypes.number,
+    int: PropTypes.number,
+  }),
   increment: PropTypes.func,
   decrement: PropTypes.func,
   remainPoints: PropTypes.number,
+};
+
+StatisticsControl.defaultProps = {
+  statistics: {
+    str: 10,
+    agi: 10,
+    luk: 10,
+    int: 10,
+  },
+  increment: () => {},
+  decrement: () => {},
+  remainPoints: 0,
 };
 
 export default function StatisticsControl({
@@ -15,7 +33,7 @@ export default function StatisticsControl({
   decrement,
   remainPoints,
 }) {
-  const statisticProps = Object.entries(statistics).map(([name, value], i) => {
+  const statisticProps = Object.entries(statistics).map(([name, value]) => {
     const operators = {
       increment: () => increment(name),
       decrement: () => decrement(name),
@@ -32,6 +50,7 @@ export default function StatisticsControl({
   return (
     <Statistics>
       {statisticProps.map((props, i) => (
+        // eslint-disable-next-line react/no-array-index-key
         <StatisticBar {...props} key={i} />
       ))}
     </Statistics>
